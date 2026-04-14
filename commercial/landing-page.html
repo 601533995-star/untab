@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untab Pro - 专业浏览器生产力工具</title>
+    <meta name="description" content="🚀 提升您的浏览器工作效率！智能标签页管理、云同步、团队协作，让浏览器成为您的生产力利器。">
+    <meta name="keywords" content="浏览器扩展,标签页管理,生产力工具,云同步,团队协作">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Untab Pro - 专业浏览器生产力工具">
+    <meta property="og:description" content="智能标签页管理，提升浏览器工作效率10倍！">
+    <meta property="og:image" content="https://untab-pro.com/images/og-image.png">
+    <meta property="og:url" content="https://untab-pro.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>">
+    
+    <!-- Styles -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .gradient-text { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
+        .pulse-glow { animation: pulse-glow 2s infinite; }
+        @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.6); } 50% { box-shadow: 0 0 30px rgba(102, 126, 234, 0.9); } }
+        
+        .feature-icon { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
+        
+        .pricing-recommended {
+            border: 3px solid #667eea;
+            position: relative;
+            transform: scale(1.05);
+        }
+        
+        .pricing-recommended::before {
+            content: "最受欢迎";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 16px;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .demo-container {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .browser-header {
+            background: #f7fafc;
+            padding: 12px 16px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .traffic-lights {
+            display: flex;
+            gap: 6px;
+        }
+
+        .traffic-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .red { background: #ff5f57; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #28ca42; }
+
+        .url-bar {
+            flex: 1;
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 6px 12px;
+            margin-left: 12px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- 导航栏 -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="text-3xl">🔍</div>
+                    <div>
+                        <div class="text-2xl font-bold gradient-text">Untab Pro</div>
+                        <div class="text-xs text-gray-500">浏览器生产力工具</div>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#features" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">功能特性</a>
+                    <a href="#demo" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">产品演示</a>
+                    <a href="#pricing" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">定价方案</a>
+                    <a href="#download" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">立即下载</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="gradient-bg text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg transition-all pulse-glow">
+                        免费试用
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero区域 -->
+    <section class="pt-32 pb-20 gradient-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center text-white">
+                <div class="text-6xl mb-6">🔍</div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                    让浏览器成为<br>
+                    <span class="bg-gradient-to-r from-yellow-400 to-pink-400 bg-clip-text text-transparent">生产力利器</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
+                    智能标签页管理 • 云端同步 • 团队协作 • 数据分析<br>
+                    提升您的浏览器工作效率 10 倍！
+                </p>
+
+                <!-- 核心数据 -->
+                <div class="flex flex-wrap justify-center gap-8 mb-12">
+                    <div class="bg-white/20 backdrop-blur-md rounded-2xl px-6 py-4">
+                        <div class="text-2xl font-bold">500+</div>
+                        <div class="text-sm text-white/80">标签页管理</div>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-md rounded-2xl px-6 py-4">
+                        <div class="text-2xl font-bold">20+</div>
+                        <div class="text-sm text-white/80">智能分组</div>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-md rounded-2xl px-6 py-4">
+                        <div class="text-2xl font-bold">∞</div>
+                        <div class="text-sm text-white/80">云端同步</div>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-md rounded-2xl px-6 py-4">
+                        <div class="text-2xl font-bold">24/7</div>
+                        <div class="text-sm text-white/80">专业支持</div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <button class="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors shadow-lg text-lg">
+                        <i class="fas fa-download mr-2"></i>免费下载扩展
+                    </button>
+                    <button class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-purple-600 transition-colors text-lg">
+                        <i class="fas fa-play mr-2"></i>观看演示视频
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品演示 -->
+    <section id="demo" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">看看Untab Pro如何工作</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">直观的界面设计，强大的功能特性，让标签页管理变得简单高效</p>
+            </div>
+
+            <div class="demo-container max-w-5xl mx-auto">
+                <!-- 浏览器顶部栏 -->
+                <div class="browser-header">
+                    <div class="traffic-lights">
+                        <div class="traffic-light red"></div>
+                        <div class="traffic-light yellow"></div>
+                        <div class="traffic-light green"></div>
+                    </div>
+                    <div class="url-bar">https://untab-pro.com/dashboard</div>
+                </div>
+                
+                <!-- 产品截图/演示区域 -->
+                <div class="p-8 bg-gradient-to-br from-blue-50 to-purple-50">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- 左侧：标签页列表 -->
+                        <div class="lg:col-span-2">
+                            <div class="bg-white rounded-lg shadow-sm border p-4">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="font-semibold text-gray-900">当前会话 (23个标签页)</h3>
+                                    <div class="flex gap-2">
+                                        <button class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">全部保存</button>
+                                        <button class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">云同步</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- 分组1 -->
+                                <div class="mb-4">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-folder text-yellow-500 mr-2"></i>
+                                        <span class="font-medium">工作项目 (8)</span>
+                                    </div>
+                                    <div class="space-y-2 ml-6">
+                                        <div class="flex items-center p-2 bg-gray-50 rounded-lg">
+                                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>📊</text></svg>" class="w-4 h-4 mr-3">
+                                            <div class="flex-1">
+                                                <div class="text-sm font-medium">项目数据分析</div>
+                                                <div class="text-xs text-gray-500">dashboard.company.com</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center p-2 bg-gray-50 rounded-lg">
+                                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>💼</text></svg>" class="w-4 h-4 mr-3">
+                                            <div class="flex-1">
+                                                <div class="text-sm font-medium">团队协作平台</div>
+                                                <div class="text-xs text-gray-500">slack.com</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center p-2 bg-gray-50 rounded-lg">
+                                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>📝</text></svg>" class="w-4 h-4 mr-3">
+                                            <div class="flex-1">
+                                                <div class="text-sm font-medium">文档编辑</div>
+                                                <div class="text-xs text-gray-500">docs.google.com</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 分组2 -->
+                                <div class="mb-4">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-folder text-blue-500 mr-2"></i>
+                                        <span class="font-medium">研究学习 (7)</span>
+                                    </div>
+                                    <div class="space-y-2 ml-6">
+                                        <div class="flex items-center p-2 bg-gray-50 rounded-lg">
+                                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>📚</text></svg>" class="w-4 h-4 mr-3">
+                                            <div class="flex-1">
+                                                <div class="text-sm font-medium">技术文档</div>
+                                                <div class="text-xs text-gray-500">developer.mozilla.org</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center p-2 bg-gray-50 rounded-lg">
+                                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>💡</text></svg>" class="w-4 h-4 mr-3">
+                                            <div class="flex-1">
+                                                <div class="text-sm font-medium">设计灵感</div>
+                                                <div class="text-xs text-gray-500">dribbble.com</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 右侧：功能面板 -->
+                        <div class="space-y-4">
+                            <!-- 搜索 -->
+                            <div class="bg-white rounded-lg shadow-sm border p-4">
+                                <h4 class="font-semibold mb-3">智能搜索</h4>
+                                <div class="relative">
+                                    <input type="text" placeholder="搜索标签页、历史记录..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg">
+                                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                                </div>
+                                <div class="mt-2 flex gap-2 text-xs">
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded">今天</span>
+                                    <span class="px-2 py-1 bg-green-100 text-green-700 rounded">工作</span>
+                                    <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded">GitHub</span>
+                                </div>
+                            </div>
+
+                            <!-- 统计 -->
+                            <div class="bg-white rounded-lg shadow-sm border p-4">
+                                <h4 class="font-semibold mb-3">使用统计</h4>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-sm text-gray-600">今日开启</span>
+                                        <span class="font-semibold">47个标签</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-sm text-gray-600">节省内存</span>
+                                        <span class="font-semibold text-green-600">2.3GB</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-sm text-gray-600">效率提升</span>
+                                        <span class="font-semibold text-blue-600">↑ 85%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 快捷操作 -->
+                            <div class="bg-white rounded-lg shadow-sm border p-4">
+                                <h4 class="font-semibold mb-3">快捷操作</h4>
+                                <div class="space-y-2">
+                                    <button class="w-full text-left px-3 py-2 text-sm hover:bg-gray-50 rounded-lg flex items-center">
+                                        <i class="fas fa-save mr-2 text-green-500"></i>
+                                        保存当前会话
+                                    </button>
+                                    <button class="w-full text-left px-3 py-2 text-sm hover:bg-gray-50 rounded-lg flex items-center">
+                                        <i class="fas fa-cloud-upload-alt mr-2 text-blue-500"></i>
+                                        同步到云端
+                                    </button>
+                                    <button class="w-full text-left px-3 py-2 text-sm hover:bg-gray-50 rounded-lg flex items-center">
+                                        <i class="fas fa-share mr-2 text-purple-500"></i>
+                                        分享给团队
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心功能 -->
+    <section id="features" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">强大的功能特性</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">为现代浏览器用户量身打造的生产力工具套件</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 功能卡片 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border card-hover">
+                    <div class="text-4xl mb-4 feature-icon">🧠</div>
+                    <h3 class="text-xl font-bold mb-3">智能分组管理</h3>
+                    <p class="text-gray-600 mb-4">AI自动识别并分组相关标签页，支持自定义规则和手动调整</p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• 自动主题分组</li>
+                        <li>• 域名智能归类</li>
+                        <li>• 自定义分组规则</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border card-hover">
+                    <div class="text-4xl mb-4 feature-icon">☁️</div>
+                    <h3 class="text-xl font-bold mb-3">云端同步</h3>
+                    <p class="text-gray-600 mb-4">多设备间无缝同步，随时随地访问您的工作环境</p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• 实时云端备份</li>
+                        <li>• 多设备同步</li>
+                        <li>• 离线模式支持</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border card-hover">
+                    <div class="text-4xl mb-4 feature-icon">🔍</div>
+                    <h3 class="text-xl font-bold mb-3">高级搜索</h3>
+                    <p class="text-gray-600 mb-4">秒级搜索标签页、历史记录，支持模糊匹配和筛选</p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• 全文内容搜索</li>
+                        <li>• 时间范围过滤</li>
+                        <li>• 标签和注释</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border card-hover">
+                    <div class="text-4xl mb-4 feature-icon">👥</div>
+                    <h3 class="text-xl font-bold mb-3">团队协作</h3>
+                    <p class="text-gray-600 mb-4">与团队成员共享标签页集合，实时协作和讨论</p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• 标签页共享</li>
+                        <li>• 团队工作空间</li>
+                        <li>• 协作注释</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border card-hover">
+                    <div class="text-4xl mb-4 feature-icon">📊</div>
+                    <h3 class="text-xl font-bold mb-3">数据分析</h3>
+                    <p class="text-gray-600 mb-4">深度分析浏览习惯，优化工作效率和时间管理</p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• 使用时长统计</li>
+                        <li>• 效率分析报告</li>
+                        <li>• 个性化建议</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border card-hover">
+                    <div class="text-4xl mb-4 feature-icon">⚡</div>
+                    <h3 class="text-xl font-bold mb-3">性能优化</h3>
+                    <p class="text-gray-600 mb-4">智能内存管理，大幅减少浏览器资源占用</p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• 自动标签页休眠</li>
+                        <li>• 内存使用优化</li>
+                        <li>• 电池续航提升</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 定价方案 -->
+    <section id="pricing" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">选择适合您的方案</h2>
+                <p class="text-xl text-gray-600">从个人用户到企业团队的完整解决方案</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- 免费版 -->
+                <div class="bg-white rounded-2xl p-8 border-2 border-gray-200">
+                    <div class="text-center mb-6">
+                        <div class="text-5xl mb-3">🆓</div>
+                        <h3 class="text-2xl font-bold mb-2">免费版</h3>
+                        <div class="text-4xl font-bold">¥0<span class="text-lg font-normal text-gray-500">/月</span></div>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mr-3 mt-1"></i><span>管理20个标签页</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mr-3 mt-1"></i><span>3个智能分组</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mr-3 mt-1"></i><span>基础搜索功能</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mr-3 mt-1"></i><span>本地数据存储</span></li>
+                        <li class="flex items-start"><i class="fas fa-times text-gray-400 mr-3 mt-1"></i><span class="text-gray-400">云端同步</span></li>
+                        <li class="flex items-start"><i class="fas fa-times text-gray-400 mr-3 mt-1"></i><span class="text-gray-400">数据分析</span></li>
+                    </ul>
+                    <button class="w-full bg-gray-200 text-gray-800 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
+                        免费使用
+                    </button>
+                </div>
+
+                <!-- 专业版 -->
+                <div class="bg-white rounded-2xl p-8 pricing-recommended">
+                    <div class="text-center mb-6">
+                        <div class="text-5xl mb-3">🚀</div>
+                        <h3 class="text-2xl font-bold mb-2">专业版</h3>
+                        <div class="text-4xl font-bold gradient-text">¥69<span class="text-lg font-normal text-gray-500">/月</span></div>
+                        <div class="text-sm text-gray-500 mt-1">年付享8.5折</div>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mr-3 mt-1"></i><span>管理500个标签页</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mr-3 mt-1"></i><span>20个智能分组</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mr-3 mt-1"></i><span>高级搜索过滤</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mr-3 mt-1"></i><span>云端同步</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mr-3 mt-1"></i><span>数据分析报告</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mr-3 mt-1"></i><span>自定义主题</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mr-3 mt-1"></i><span>优先技术支持</span></li>
+                    </ul>
+                    <button class="w-full gradient-bg text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all pulse-glow">
+                        立即升级
+                    </button>
+                </div>
+
+                <!-- 团队版 -->
+                <div class="bg-white rounded-2xl p-8 border-2 border-gray-200">
+                    <div class="text-center mb-6">
+                        <div class="text-5xl mb-3">👥</div>
+                        <h3 class="text-2xl font-bold mb-2">团队版</h3>
+                        <div class="text-4xl font-bold">¥199<span class="text-lg font-normal text-gray-500">/月</span></div>
+                        <div class="text-sm text-gray-500 mt-1">5个用户起</div>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mr-3 mt-1"></i><span>所有专业版功能</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mr-3 mt-1"></i><span>无限标签页管理</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mr-3 mt-1"></i><span>团队工作空间</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mr-3 mt-1"></i><span>协作分享</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mr-3 mt-1"></i><span>团队分析面板</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mr-3 mt-1"></i><span>专属客户经理</span></li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mr-3 mt-1"></i><span>SLA服务保证</span></li>
+                    </ul>
+                    <button class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
+                        联系销售
+                    </button>
+                </div>
+            </div>
+
+            <!-- 企业咨询 -->
+            <div class="text-center mt-12">
+                <p class="text-gray-600 mb-4">需要定制化解决方案？</p>
+                <button class="text-purple-600 font-semibold hover:text-purple-800 transition-colors">
+                    联系我们讨论企业方案 →
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 立即下载 -->
+    <section id="download" class="py-20 gradient-bg">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">立即开始提升效率</h2>
+            <p class="text-xl mb-8">免费下载，立即体验智能标签页管理的强大功能</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+                <button class="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors shadow-lg text-lg flex items-center">
+                    <i class="fab fa-chrome mr-3"></i>Chrome 扩展商店
+                </button>
+                <button class="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors shadow-lg text-lg flex items-center">
+                    <i class="fab fa-firefox mr-3"></i>Firefox 插件商店
+                </button>
+            </div>
+
+            <div class="text-white/80">
+                <p class="mb-2">✓ 30天免费试用专业版功能</p>
+                <p>✓ 无需信用卡，立即开始</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="text-2xl">🔍</div>
+                        <div class="text-xl font-bold gradient-text">Untab Pro</div>
+                    </div>
+                    <p class="text-gray-400 mb-4 max-w-md">
+                        专业的浏览器生产力工具，让您的工作更高效、更智能。
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-4">产品</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">功能特性</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">定价方案</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">更新日志</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-4">支持</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">帮助中心</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">联系我们</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">用户社区</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2026 Untab Pro. 保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('backdrop-blur-xl');
+            }
+        });
+
+        // 购买按钮点击事件
+        document.querySelectorAll('button').forEach(btn => {
+            if (btn.textContent.includes('立即升级') || btn.textContent.includes('免费试用')) {
+                btn.addEventListener('click', () => {
+                    // 这里可以添加购买流程或试用注册
+                    alert('感谢您的兴趣！购买系统即将开放。');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
